@@ -6,9 +6,12 @@ const messages = ["Hello","World"]
 //creatServer
 // listener that waits for request
 const server = http.createServer((request,response)=> {
-        const newMessage=request.url.split("=")[1].replace("+"," ")
-        if(newMessage) messages.push(newMessage)
-        messages.push(request)
+        const newMessage=request.url.split("=")[1]
+        if(newMessage){
+                       messages.push(newMessage.replace(/\+/g," "))
+                       
+        } 
+         //messages.push(request)
 
     response.setHeader('Content-Type', 'text/html');
     response.write(`
