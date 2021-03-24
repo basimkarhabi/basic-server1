@@ -10,4 +10,4 @@ const server = http.createServer((requests,response)=> {
 })
 
 //start the server/ wait for requests on prot 8080
-server.listen(8080)
+server.listen(process.env.PORT || 8080)
