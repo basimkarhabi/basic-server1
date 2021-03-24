@@ -5,7 +5,12 @@ const messages = ["Hello","World"]
 
 //creatServer
 // listener that waits for request
-const server = http.createServer((requests,response)=> {
+const server = http.createServer((request,response)=> {
+        console.log(request.url)
+        const newMessage=request.url.split("=")[1].replace("+"," ")
+        if(newMessage) messages.push(newMessage)
+        messages.push(request)
+
     response.setHeader('Content-Type', 'text/html');
     response.write(`
     <h1>Hi Baseam </h1>
