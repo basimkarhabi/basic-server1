@@ -1,17 +1,12 @@
 const http = require('http');
 const messages = ["Hello","World"]
 
-//console.log("Hello World")
-
-//creatServer
-// listener that waits for request
-const server = http.createServer((request,response)=> {
-        const newMessage=request.url.split("=")[1]
+function processRequest(request,response){
+         const newMessage=request.url.split("=")[1]
         if(newMessage){
-                       messages.push(newMessage.replace(/\+/g," "))
-                       
+                       messages.push(newMessage.replace(/\+/g," "))            
         } 
-         //messages.push(request)
+
 
     response.setHeader('Content-Type', 'text/html');
     response.write(`
@@ -21,11 +16,13 @@ const server = http.createServer((request,response)=> {
         </form>
     `)       
         
+
     messages.forEach( m => {
             response.write(`<p>${m}</p>`)
     })
        response.end()
-})
+}
 
-//start the server/ wait for requests on prot 8080
+const server = http.createServer(processRequest)
+
 server.listen(process.env.PORT || 8080)
