@@ -16,7 +16,6 @@ const server = http.createServer((requests,response)=> {
         
     messages.forEach( m => {
             response.write(`<p>${m}</p>`)
-
     })
        response.end()
 })
